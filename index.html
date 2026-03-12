@@ -188,6 +188,28 @@
         .sub-content.active {
             display: block;
         }
+        
+        .webtoon-viewer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #000;
+            padding: 20px 0;
+            border-radius: 10px;
+            border: 1px solid #222;
+        }
+
+        .webtoon-viewer img {
+            width: 100%;
+            max-width: 800px; /* PC에서도 너무 커지지 않게 제한 */
+            height: auto;
+            display: block; /* 이미지 사이의 미세한 틈새 제거 */
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .webtoon-viewer { padding: 5px 0; border: none; }
+        }
 
         footer {
             text-align: center;
@@ -213,6 +235,7 @@
     <div class="nav-link" onclick="showSection('academy', this)">ACADEMY</div>
     <div class="nav-link" onclick="showSection('guide', this)">PLAY GUIDE</div>
     <div class="nav-link" onclick="showSection('tips', this)">PLAY TIPS</div>
+    <div class="nav-link" onclick="showSection('webtoon', this)">WEBTOON</div>
 </nav>
 
 <div class="container">
@@ -440,6 +463,21 @@
                 <p>관리자 클레어와 분석가 클라리스는 모든 상황을 인과율과 데이터로 예측합니다. 당신은 그들의 계산을 방해하는 가장 위험한 <span class="highlight">오류값</span>이 되어야 합니다. 철저한 이익보다는 시스템이 이해할 수 없는 비논리적인 헌신이나 도박적인 선택을 하십시오. 당신의 변칙적인 행동이야말로 엘레노어를 시스템의 꼭두각시가 아닌 독립된 주권자로 만들 유일한 열쇠입니다.</p>
             </div>
 
+        </div>
+    </section>
+    
+    <section id="webtoon" class="section">
+        <h2 style="color: var(--accent-red);">프롤로그: 핏빛 메르헨</h2>
+        <p>알비온 제국의 탄생, 그리고 멈춰버린 시간 속에서 다시 시작되는 기적의 이야기.</p>
+        
+        <div class="webtoon-viewer">
+            <img src="C1.png" alt="Chapter 1">
+            <img src="C2.png" alt="Chapter 2">
+            <img src="C3.png" alt="Chapter 3">
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <p class="highlight">"지키러 왔어요. 당신을 기사로 서임해줄테니, 저를 황제로 만들어주세요."</p>
         </div>
     </section>
 
