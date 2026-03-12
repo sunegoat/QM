@@ -206,6 +206,18 @@
             display: block; /* 이미지 사이의 미세한 틈새 제거 */
             margin: 0;
         }
+        
+        .toon-label {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 40px 0 20px 0;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(197, 160, 89, 0.5);
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8), transparent);
+        }
 
         @media (max-width: 600px) {
             .webtoon-viewer { padding: 5px 0; border: none; }
@@ -470,12 +482,12 @@
         <h2 style="color: var(--accent-red);">프롤로그</h2>
         
         <div class="webtoon-viewer">
-            <img src="C1.png" alt="Chapter 1">
-            <img src="C2.png" alt="Chapter 2">
-            <img src="C3.png" alt="Chapter 3">
-        </div>
-        
-        <div style="text-align: center; margin-top: 30px;">
+            <div class="toon-label">[세계관 설명]</div>
+            <img src="C1.png" alt="세계관 배경 1">
+            <img src="C2.png" alt="세계관 배경 2">
+            
+            <div class="toon-label">[시작 상황]</div>
+            <img src="C3.png" alt="시작 상황">
         </div>
     </section>
 
