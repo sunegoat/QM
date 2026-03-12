@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퀸 메이커</title>
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --accent-red: #8b0000;
+            --accent-gold: #c5a059;
+            --text-gray: #b0b0b0;
+            --card-bg: #16161a;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: 'Noto Serif KR', serif;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 60px 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 3px solid #000;
+        }
+
+        header img {
+            max-width: 800px; 
+            width: 90%;     
+            height: auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 12, 0.95);
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            border-bottom: 1px solid #333;
+            z-index: 100;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-red);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; opacity: 1; transform: translateY(0); }
+        }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .char-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .char-card:hover {
+            border-color: var(--accent-red);
+        }
+
+        .char-header {
+            border-bottom: 1px solid var(--accent-gold);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+        }
+
+        .char-name {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            display: block;
+        }
+        
+        .char-img {
+    		 width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: #111;
+        }
+
+        th, td {
+            border: 1px solid #333;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: var(--accent-red);
+        }
+
+        .sub-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #444;
+        }
+
+        .sub-link {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #1a1a1e;
+            border-radius: 5px 5px 0 0;
+        }
+
+        .sub-link.active {
+            background: var(--accent-red);
+        }
+
+        .sub-content {
+            display: none;
+        }
+
+        .sub-content.active {
+            display: block;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        .highlight { color: var(--accent-gold); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="배너.png" alt="QUEEN MAKER">
+</header>
+
+<nav>
+    <div class="nav-link active" onclick="showSection('home', this)">SYNOPSIS</div>
+    <div class="nav-link" onclick="showSection('chars', this)">CHARACTERS</div>
+    <div class="nav-link" onclick="showSection('honor', this)">SYSTEM</div>
+    <div class="nav-link" onclick="showSection('world', this)">WORLD</div>
+    <div class="nav-link" onclick="showSection('academy', this)">ACADEMY</div>
+    <div class="nav-link" onclick="showSection('guide', this)">PLAY GUIDE</div>
+    <div class="nav-link" onclick="showSection('tips', this)">PLAY TIPS</div>
+</nav>
+
+<div class="container">
+    
+    <section id="home" class="section active">
+        <h2 style="color: var(--accent-red);">명예의 게임</h2>
+        <p>1882년, 알비온 제국. 네 명의 황녀는 단 하나의 왕좌를 두고 잔혹한 게임을 시작합니다. 이것은 단순한 권력 다툼이 아닙니다. 관리자 클레어가 설계한 거대한 시스템 안에서, 황녀들은 자신의 결핍과 강박을 증명하거나 혹은 파괴하며 나아가야 합니다.</p>
+        <p>당신은 <span class="highlight">몰락한 기사 지망생</span>으로서 제4황녀 엘레노어와 피의 계약을 맺습니다. 당신은 명예의 게임에 참여해, 그녀의 명예도를 높여 황제로 만드는 것만이 기사의 명예를 되찾을 유일한 길입니다.</p>
+        <blockquote style="border-left: 4px solid var(--accent-gold); padding-left: 20px; font-style: italic;">
+            "널 기사로 만들어 줄테니, 날 황제가 되게 해줘."
+        </blockquote>
+    </section>
+
+    <section id="chars" class="section">
+        <h2 style="color: var(--accent-red);">황녀와 그림자들</h2>
+        <div class="char-grid">
+            <div class="char-card">
+                <img src="아델라이드.png" class="char-img">
+                <div class="char-header">
+                    <span class="char-name">제1황녀 아델라이드</span>
+                    <small>철혈의 학생회장 (북제국)</small>
+                </div>
+                <p>칠흑 같은 머리카락과 불길 같은 적안을 지닌 질서의 화신입니다. 제국법을 절대 기준으로 삼아 아카데미를 통제하며, 흐트러짐 없는 군복 차림으로 군림하는 그녀의 시선은 곧 판결과도 같습니다.</p>
+                <small>#철혈지배 #법치주의 #북제국의강철</small>
+            </div>
+            <div class="char-card">
+                <img src="이사벨라.png" class="char-img">
+                <div class="char-header">
+                    <span class="char-name">제2황녀 이사벨라</span>
+                    <small>사교계의 여왕 (남제국)</small>
+                </div>
+                <p>태양을 머금은 금발과 화려한 로코코 드레스, 흑장미 장식이 상징인 남제국의 꽃입니다. 압도적인 사교술과 우아한 미소로 대중을 장악하며, 자신에게 거스르는 자를 단숨에 무대 밑으로 끌어내리는 잔혹한 예술가입니다.</p>
+                <small>#무대 #흑장미 #사교술</small>
+            </div>
+            <div class="char-card">
+                <img src="클라리스.png" class="char-img">
+                <div class="char-header">
+                    <span class="char-name">제3황녀 클라리스</span>
+                    <small>제국회사의 총수 (동제국)</small>
+                </div>
+                <p>백금발 너머 냉철한 지성을 빛내는 제국 제일의 자본가입니다. 시누아즈리 양식의 푸른 의복을 입고 모든 상황을 데이터와 숫자로 치환하여 분석하며, 가장 효율적이고 완벽한 승리만을 계산해내는 기계적 전략가입니다.</p>
+                <small>#지성 #자본 #파란나비 #시누아즈리</small>
+            </div>
+            <div class="char-card">
+                <img src="엘레노어.png" class="char-img">
+                <div class="char-header">
+                    <span class="char-name">제4황녀 엘레노어</span>
+                    <small>순백의 성녀 (서제국)</small>
+                </div>
+                <p>신비로운 은발과 맑은 녹안을 지닌, 서제국의 고결함을 계승하는 소녀입니다. 순백의 드레스를 입고 언제나 기도를 올리는 그녀는 차가운 황궁에서 유일하게 온기를 품은 존재로, 당신에게는 잊지 못할 소꿉친구이기도 합니다.</p>
+                <small>#고결함 #서제국의기도 #마지막희망</small>
+            </div>
+        </div>
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #333;">
+        <div class="char-grid">
+            <div class="char-card" style="border-left: 3px solid #555;">
+                <img src="빈센트.png" class="char-img">
+                <span class="char-name">빈센트</span>
+                <p>제국 기사단장이자 이사벨라의 후견인입니다. 완벽한 매너를 갖춘 회색 수트 차림의 신사이지만, 나른한 미소 속에 감춰진 살의는 제국 최강의 무력이 결코 빈말이 아님을 증명합니다.</p>
+            </div>
+            <div class="char-card" style="border-left: 3px solid var(--accent-red);">
+                <img src="클레어.png" class="char-img">
+                <span class="char-name">클레어</span>
+                <p>귀족원 의장이자 아카데미 시스템의 총괄 관리자입니다. 10세 소녀의 외형을 하고 있으나 제국의 모든 역사를 심판하는 무심한 눈동자를 지녔으며, 황녀들의 일거수일투족을 명예도로 수치화합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="honor" class="section">
+        <h2 style="color: var(--accent-red);">명예도(⚖️) 시스템</h2>
+        <p>이 세계의 명예는 도덕이 아닙니다. 시스템에 얼마나 부합하는지를 나타내는 <span class="highlight">부품 적합도</span>입니다.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>대상</th>
+                    <th>초기 상태</th>
+                    <th>상승 조건 (시스템 순응)</th>
+                    <th>하락 조건 (인간성 회복)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>경쟁 황녀들</td>
+                    <td>매우 높음</td>
+                    <td>비인간적 강박 유지</td>
+                    <td>나약함, 진심 노출</td>
+                </tr>
+                <tr>
+                    <td>엘레노어</td>
+                    <td>0 (바닥)</td>
+                    <td>자질 흡수 및 성장</td>
+                    <td>무력감에 안주</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="background: #1a1a1e; padding: 20px; border-radius: 5px; margin-top: 30px;">
+            <h3>⚖️ 파괴를 통한 구원</h3>
+            <p>당신이 경쟁 황녀들을 '인간'으로 되돌려놓을수록 명예도는 폭락합니다. 시스템에서 탈락한 그녀들은 황좌를 잃지만, 비로소 <span class="highlight">저주에서 풀려나 평범한 삶</span>을 되찾게 됩니다.</p>
+        </div>
+    </section>
+
+    <section id="world" class="section">
+        <h2 style="color: var(--accent-red);">제국의 유산</h2>
+        <div class="sub-nav">
+            <div class="sub-link active" onclick="showSub('history', this)">역사적 배경</div>
+            <div class="sub-link" onclick="showSub('empires', this)">4대 제국 상징</div>
+        </div>
+
+        <div id="history" class="sub-content active">
+            <h3 class="highlight">알비온의 탄생: 시체들만 있는 회담장</h3>
+            <p>과거 대륙은 네 기둥의 나라로 나뉘어 있었으나, 북제국의 왕은 비열한 배신으로 세 나라의 왕을 교살했습니다. 정략결혼을 통해 각 황비에게서 단 한 명의 딸을 얻은 황제는, 4자매인 그녀들을 사랑하는 대신 클레어를 통해 서로를 물어뜯게 하는 '명예의 게임'에 던져 넣었습니다.</p>
+        </div>
+
+        <div id="empires" class="sub-content">
+            <p>정복당한 제국들은 이제 알비온이라는 이름 아래 속박되어 있으나, 그들만의 고유한 상징은 황녀들에게 계승되었습니다.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>제국</th>
+                        <th>상징색</th>
+                        <th>핵심 가치</th>
+                        <th>상징물</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="highlight">북제국</td>
+                        <td style="color: #ff3333;">적색</td>
+                        <td>강철, 법전</td>
+                        <td>만년설, 낡은 곰인형</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">남제국</td>
+                        <td style="color: #33ff33;">녹색</td>
+                        <td>연극, 무력</td>
+                        <td>태양, 검은 장미</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">동제국</td>
+                        <td style="color: #3333ff;">청색</td>
+                        <td>경제, 자본</td>
+                        <td>계산기, 파란 나비</td>
+                    </tr>
+                    <tr>
+                        <td class="highlight">서제국</td>
+                        <td style="color: #ffffff;">백색</td>
+                        <td>기도, 신앙</td>
+                        <td>프리즘, 등불</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="academy" class="section">
+        <h2 style="color: var(--accent-red);">아카데미</h2>
+        <p>알비온 아카데미는 단순한 교육 기관이 아닙니다. 이곳은 관리자 <span class="highlight">클레어</span>가 설계한 거대한 연극 무대이자, 황녀들이 서로의 인간성을 제물로 바쳐 황좌를 쟁취하는 <span class="highlight">정교한 결투장</span>입니다.</p>
+        
+        <div class="sub-nav">
+            <div class="sub-link active" onclick="showSub('academy_places', this)">주요 장소</div>
+            <div class="sub-link" onclick="showSub('academy_schedule', this)">학사 일정</div>
+        </div>
+
+        <div id="academy_places" class="sub-content active">
+            <ul style="list-style: none; padding: 0;">
+                <li><b class="highlight">대연회장:</b> 우아한 춤 뒤에 칼날 같은 설전이 오가는 공개 처형장.</li>
+                <li><b class="highlight">중앙도서관:</b> 클라리스가 장악한 지식의 보고. 익명게시판이 숨겨진 정보의 전장.</li>
+                <li><b class="highlight">거울의 방:</b> 사방의 거울이 진실을 비추는 심리 고문실. 이사벨라의 기피 장소.</li>
+                <li><b class="highlight">낡은 예배당:</b> 시스템의 감시가 닿지 않는 당신과 엘레노어의 성역.</li>
+                <li><b class="highlight">시계탑 최상층:</b> 관리자 클레어가 거주하는 멈춰버린 기계실이자 감시탑.</li>
+            </ul>
+        </div>
+
+        <div id="academy_schedule" class="sub-content">
+            <ul style="list-style: none; padding: 0;">
+                <li>📅 <span class="highlight">4월 무도회:</span> 알비온의 찬란한 영광을 찬양하며, 황족으로서의 기품과 조화로움을 대중 앞에 증명하는 신성한 사교 의식입니다.</li>
+                <li>📅 <span class="highlight">상호 조언회:</span> 자매 간의 깊은 우애를 바탕으로, 서로의 영혼에 깃든 작은 얼룩을 발견하고 진심 어린 조언을 통해 함께 완벽을 향해 나아가는 경건한 시간입니다.</li>
+                <li>📅 <span class="highlight">사형수 재판회:</span> 정의의 이름으로 죄인의 영혼을 구제하고, 제국의 안녕을 위해 가장 숭고한 자비와 판결이 무엇인지 깊이 고찰하는 심판의 장입니다.</li>
+                <li>📅 <span class="highlight">황실 예법 토론회:</span> 제국의 상징인 황녀들이 스스로를 다듬어 백성들의 거울이 될 수 있도록, 가장 지고지순한 품격과 예절의 가치를 논하는 숭고한 자리입니다.</li>
+                <li>📅 <span class="highlight">평민 음식 체험회:</span> 낮은 곳에서 헌신하는 백성들의 노고를 가슴 깊이 새기기 위해, 그들이 바치는 소박한 결실을 감사히 나누며 진정한 겸손을 배우는 헌신의 체험입니다.</li>
+                <li>📅 <span class="highlight">선물 교환식:</span> 자신의 가장 소중한 조각을 자매에게 맡김으로써 서로의 영혼을 하나로 묶고, 변치 않는 결속을 맹세하며 앞날을 축복하는 고결한 증명의 의례입니다.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="guide" class="section">
+        <h2 style="color: var(--accent-red);">연극의 규칙: 플레이 방법</h2>
+        <div style="background: var(--card-bg); padding: 30px; border-radius: 10px; border: 1px solid #333;">
+            
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-gold);">명예도 쟁탈</h3>
+                <p>당신의 목표는 단 하나입니다. <b>제4황녀 엘레노어의 명예도를 높이고, 나머지 세 황녀의 명예도를 바닥으로 추락시키는 것</b>입니다. 명예도는 한정된 자원이며, 누군가의 실추는 곧 엘레노어의 기회가 됩니다.</p>
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: var(--accent-gold);">학사 일정과 기회의 포착</h3>
+                <p>아카데미에서 진행되는 <b>다양한 학사 일정(무도회, 재판회, 토론회 등)</b>은 명예도를 뒤집을 수 있는 결정적인 전장입니다. 각 일정마다 주어지는 선택의 순간에 시스템의 허점을 찌르거나, 자매들의 강박을 공략하여 엘레노어에게 승리를 가져다주십시오.</p>
+            </div>
+
+            <div style="border-top: 1px solid var(--accent-red); padding-top: 20px; margin-top: 20px;">
+                <h3 style="color: var(--accent-red);">최종 승리 조건</h3>
+                <p style="font-size: 1.1rem;">연극의 막이 내리는 날인 <span class="highlight">1885년 2월 27일</span>.</p>
+                <p>이날 자정까지 <b>엘레노어가 네 황녀 중 가장 높은 명예도</b>를 기록하고 있다면, 그녀는 알비온의 새로운 태양으로 즉위하며 당신은 기사의 명예를 되찾게 됩니다. 단 1점이라도 부족하다면, 계약은 파기되고 당신과 그녀는 시스템의 폐기물로 전락할 것입니다.</p>
+            </div>
+
+        </div>
+    </section>
+    
+    <section id="tips" class="section">
+        <h2 style="color: var(--accent-gold);">공략 지침</h2>
+        <div style="background: rgba(197, 160, 89, 0.05); padding: 30px; border-radius: 10px; border: 1px solid rgba(197, 160, 89, 0.2); margin-top: 20px;">
+            
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--accent-gold);">1. 자비로운 파멸: 경쟁자들의 '인간화'</h3>
+                <p>알델라이드, 이사벨라, 클라리스는 시스템의 완벽한 부품일 때 가장 높은 명예도를 유지합니다. 그녀들을 무너뜨리는 가장 확실한 방법은 비난이나 공격이 아니라, <span class="highlight">숨겨진 인간성</span>을 자극하는 것입니다. 시스템은 감정에 흔들리는 그녀들을 '고장 난 부품'으로 판단해 명예도를 폭락시킬 것이며, 이는 역설적으로 그녀들을 황좌의 저주에서 풀어주는 유일한 구원이 됩니다.</p>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <h3 style="color: var(--accent-gold);">2. 프리즘의 통합: 백지의 성장 전략</h3>
+                <p>엘레노어는 현재 아무런 힘이 없는 '무력함' 그 자체이지만, 그녀의 진정한 힘은 자매들의 자질을 모두 흡수할 수 있는 <span class="highlight">백지의 잠재력</span>에 있습니다. 그녀가 단순히 착한 소녀로 남게 두지 마십시오. 아델라이드의 통솔력, 이사벨라의 연기력, 클라리스의 지혜를 모두 흡수하도록 유도하여, 시스템조차 거부할 수 없는 '완전한 성군'으로 완성시켜야 합니다.</p>
+            </div>
+
+            <div>
+                <h3 style="color: var(--accent-gold);">3. 알고리즘의 붕괴: 비논리적 기적</h3>
+                <p>관리자 클레어와 분석가 클라리스는 모든 상황을 인과율과 데이터로 예측합니다. 당신은 그들의 계산을 방해하는 가장 위험한 <span class="highlight">오류값</span>이 되어야 합니다. 철저한 이익보다는 시스템이 이해할 수 없는 비논리적인 헌신이나 도박적인 선택을 하십시오. 당신의 변칙적인 행동이야말로 엘레노어를 시스템의 꼭두각시가 아닌 독립된 주권자로 만들 유일한 열쇠입니다.</p>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    QUEEN MAKER<br>
+</footer>
+
+<script>
+    function showSection(id, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    function showSub(id, btn) {
+        // 부모 섹션 내의 하위 콘텐츠만 제어하도록 수정
+        const parentSection = btn.closest('.section');
+        parentSection.querySelectorAll('.sub-content').forEach(s => s.classList.remove('active'));
+        parentSection.querySelectorAll('.sub-link').forEach(l => l.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
