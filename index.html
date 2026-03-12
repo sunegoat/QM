@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no, address=no, email=no">
     <title>퀸 메이커</title>
     <style>
         :root {
@@ -43,7 +44,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            padding: 10px;
+            padding: 5px;
             border-bottom: 1px solid #333;
             z-index: 100;
         }
@@ -51,11 +52,11 @@
         .nav-link {
             color: white;
             text-decoration: none;
-            margin: 5px 10px;
-            font-size: 0.9rem;
+            margin: 5px 8px;
+            font-size: 0.85rem;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.3s;
+            white-space: nowrap;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -135,11 +136,21 @@
         }
 
         table {
-            min-width: 600px;
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
             background: #111;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 0 15px; margin: 20px auto; }
+            header { padding: 40px 0; }
+            .char-grid { grid-template-columns: 1fr; }
+            h2 { font-size: 1.5rem; }
         }
         
         th, td {
